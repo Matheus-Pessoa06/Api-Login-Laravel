@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\UserRequest;
+use App\Services\AuthService;
 
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -16,14 +17,14 @@ class UserController extends Controller
 
     public function index(UserRequest $request){
         
-        $request->validate();
+        $request->validated();
 
         $token = $this->authService->login($request);
         
         if(isset($token['error'])){
-            return response()->json($result, 401);
+            return response()->json($token, 401);
         }
 
-        return response()->json($result);
+        return response()->json($token);
     }
 }
