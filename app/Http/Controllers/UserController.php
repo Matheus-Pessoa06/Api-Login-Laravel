@@ -7,24 +7,19 @@ use App\Services\AuthService;
 
 class UserController extends Controller
 {
+    protected $user;
 
-    protected $authService;
-
-    public function __construct(AuthService $authService){
-        $this->authService = $authService;
+    public function __construct(UserRepository $user){
+        $this->user = $user;
     }
-
-
-    public function index(UserRequest $request){
-        
+    public function store(UserRequest $request){
+       
         $request->validated();
+        dd($request);
+        $usuario = $this->user->createUser($request->all());
 
-        $token = $this->authService->login($request);
-        
-        if(isset($token['error'])){
-            return response()->json($token, 401);
-        }
-
-        return response()->json($token);
+        return response()->json($user, 201);
     }
+
+
 }
