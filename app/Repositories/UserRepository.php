@@ -3,6 +3,8 @@
 
 namespace App\Repositories;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 
 Class UserRepository{
@@ -30,7 +32,13 @@ Class UserRepository{
 
     public function createUser($data){
 
-        return $this->user->create($data);
+        return $this->user->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 
     public function updateUser($id, $data){
