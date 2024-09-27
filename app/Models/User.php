@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
+use DateTime;
 
 class User extends Authenticatable
 {
@@ -21,11 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'created_at',
-        'updated_at'
     ];
-
-    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -49,4 +47,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
 }

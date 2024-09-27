@@ -4,7 +4,7 @@
 namespace App\Services;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
-
+use Carbon\Carbon;
 
 
 Class AuthService
@@ -22,7 +22,7 @@ Class AuthService
 
         if($user && hash::check($credentials['password'], $user->password)){
             return [
-                'token' => $user->createToken('auth_token')->plainTextToken
+                'token' => $user->createToken('auth_token', ['*'], Carbon::now()->addHour(1))->plainTextToken
             ];
         }
 

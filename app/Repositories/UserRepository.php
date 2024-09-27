@@ -32,12 +32,7 @@ Class UserRepository{
 
     public function createUser($data){
 
-        return $this->user->create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            
-        ]);
+        return $this->user->create($data);
     }
 
     public function updateUser($id, $data){
